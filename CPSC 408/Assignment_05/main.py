@@ -11,5 +11,5 @@ mydb = mysql.connector.connect(
     auth_plugin = 'mysql_native_password'
     )
 print(mydb)
-mydb.close()
+
 
