@@ -1,6 +1,5 @@
 from Driver import Driver
-
-
+from Rider import Rider
 
 class User:
     def __init__(self, new: bool):

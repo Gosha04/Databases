@@ -27,7 +27,7 @@ class Driver:
             self.driverID = max_id + 1
 
     def viewRating(self):
-        mycursor.execute("SELECT Rating FROM driver WHERE driverID = %s", (self.driverID,))
+        mycursor.execute("SELECT Rating FROM driver WHERE driverID = %i", (self.driverID,))
         result = mycursor.fetchone()
         rating = result[0] if result[0] is not None else 0 # Same as above we can remove this later I think
         return rating
@@ -38,8 +38,8 @@ class Driver:
             raise ValueError("Invalid input. Please enter 'y' or 'n'.")
         
         if self.status == 'y':
-            mycursor.execute("UPDATE TABLE driver SET Rating = True WHERE driverID = %s", (self.driverID,))
+            mycursor.execute("UPDATE TABLE driver SET Rating = True WHERE driverID = %i", (self.driverID,))
         else: 
-            mycursor.execute("UPDATE TABLE driver SET Rating = False WHERE driverID = %s", (self.driverID,))
+            mycursor.execute("UPDATE TABLE driver SET Rating = False WHERE driverID = %i", (self.driverID,))
 
         #TODO Implement viewRides(self) but this needs a Rides class
