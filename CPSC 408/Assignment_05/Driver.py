@@ -38,8 +38,8 @@ class Driver:
             raise ValueError("Invalid input. Please enter 'y' or 'n'.")
         
         if self.status == 'y':
-            mycursor.execute("UPDATE TABLE driver SET Rating = True WHERE driverID = %i", (self.driverID,))
+            mycursor.execute("UPDATE TABLE driver SET Rating = True WHERE driverID = %s", (self.driverID,))
         else: 
-            mycursor.execute("UPDATE TABLE driver SET Rating = False WHERE driverID = %i", (self.driverID,))
+            mycursor.execute("UPDATE TABLE driver SET Rating = False WHERE driverID = %s", (self.driverID,))
 
         #TODO Implement viewRides(self) but this needs a Rides class

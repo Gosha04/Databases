@@ -36,7 +36,12 @@ class Rider:
         self.endSpot = None
 
     def getRide(self):
-        Rides(rideID, self.riderID, driverID, self.startSpot, self.endSpot, completed= False, driveRating)
+        mycursor.execute("SELECT MAX(rideID) FROM ride")
+        result = mycursor.fetchone()
+        maxRide = result[0] if result[0] is not None else 0 # Just in case, shouldn't need that last bit
+        rideID = maxRide + 1
+        driverID = None
+        Rides(rideID, self.riderID, driverID, self.startSpot, self.endSpot, completed= False)
 
 
     

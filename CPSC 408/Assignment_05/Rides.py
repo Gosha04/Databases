@@ -26,5 +26,21 @@ class Rides:
         self.completed = completed
         self.driveRating = driveRating
 
-    def addLocationsDB (self):
-        mycursor.execute(" UPDATE TABLE rider SET startSpot = %s, endSpot = %s ", (self.startSpot, self.endSpot))
+        if driverID == None:
+            driverID = input("Be the app for testing purposes and input the ID of a Driver that exists")
+
+        mycursor.execute(""" UPDATE TABLE rides
+                        SET rideID = %s, riderID = %s, driverID = %s,  startSpot = %s, endSpot = %s""",
+                        (self.rideID, self.riderID, self.driverID, self.startSpot, self.endSpot))
+
+
+    def endDriveRateDriver(self):
+        self.completed = True
+        self.driveRating = input("How was your drive? Rate 1-5")
+        if self.driveRating not in (1,5):
+            raise ValueError("Invalid input. Please enter a number 1-5.")
+        
+        mycursor.execute("""
+                        UPDATE TABLE rides
+                        SET driveRating = %s, Completed = True
+                        """, (self.driveRating,))
