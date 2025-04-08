@@ -43,6 +43,32 @@ class Rider:
         driverID = None
         Rides(rideID, self.riderID, driverID, self.startSpot, self.endSpot, completed= False)
 
+    def viewRides(self):
+        mycursor.execute("SELECT * FROM rides WHERE riderID = %s", (self.riderID,))
+
+    def endDriveRateDriver(self):
+        print(mycursor.execute("SELECT rideID FROM rides WHERE riderID = %s LIMIT 1 DESC", (self.riderID,)))
+        rideCheck = input("Is all the information presented true? \n y/n" )
+
+        if rideCheck not in ('y', 'n'):
+            raise ValueError("Invalid input. Please enter 'y' or 'n'.")
+    
+        if rideCheck == 'n':
+            newRideID = input("We're sorry. Could ыоу please provide us a correct ID: ")
+            lastRide = newRideID
+        else:
+            result = mycursor.fetchone()
+            lastRide = result[0] if result[0] is not None else 0
+
+        self.driveRating = input("How was your drive? Rate 1-5")
+        if self.driveRating not in (1,5):
+            raise ValueError("Invalid input. Please enter a number 1-5.")
+        
+        mycursor.execute("""
+                        UPDATE rides
+                        SET driveRating = %s, Completed = 1
+                        WHERE rideID = %s
+                        """, (self.driveRating, lastRide))
 
     
         
