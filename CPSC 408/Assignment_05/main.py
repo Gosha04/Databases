@@ -58,7 +58,7 @@ while True:
     currUser = introMenuUser.accessAccount()
 
     # Driver Menu 
-    #TODO LOOPS FOR SOME GOD FORSAKEN REASON AAAAAAAAAAH
+    #TODO LOOPS FOR SOME GOD FORSAKEN REASON AAAAAAAAAAH...not making data entries check respective classes
     if isinstance(currUser, Driver):
         while True:
             print("Welcome to the Driver Menu!")
@@ -94,7 +94,7 @@ while True:
                 break  
 
     # Rider menu
-    #TODO LOOPS FOR SOME GOD FORSAKEN REASON AAAAAAAAAAH
+    #TODO LOOPS FOR SOME GOD FORSAKEN REASON AAAAAAAAAAH...not making data entries check respective classes
     elif isinstance(currUser, Rider):
         while True:
             print("Welcome to the Rider Menu!")
