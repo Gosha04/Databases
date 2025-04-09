@@ -29,9 +29,10 @@ class Rides:
         if driverID == None:
             driverID = input("Be the app for testing purposes and input the ID of a Driver that exists")
 
-        mycursor.execute(""" UPDATE rides
-                        SET rideID = %s, riderID = %s, driverID = %s,  startSpot = %s, endSpot = %s""",
-                        (self.rideID, self.riderID, self.driverID, self.startSpot, self.endSpot))
+        mycursor.execute("""
+            INSERT INTO rides (rideID, riderID, driverID, startSpot, endSpot)
+            VALUES (%s, %s, %s, %s, %s)""", (self.rideID, self.riderID, self.driverID, self.startSpot, self.endSpot))
+        mydb.commit()
         
     def __str__(self):
         return f"RideID: {self.rideID}, RiderID: {self.riderID}, DriverID: {self.driverID}, From: {self.startSpot} → To: {self.endSpot}, Completed: {self.completed}"

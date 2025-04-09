@@ -53,7 +53,19 @@ while True:
         else:
             userNewCheck = False
             print("\nWelcome existing user!")
-            introMenuUser = User(userNewCheck)
+
+            while True:
+                userType = input("What type of user are you? A (d)river or (r)ider?").strip().lower()
+                if userType not in ('r', 'd'):
+                   print("Invalid input. Please 'r' or 'd'.")
+                   continue
+                break
+            if userType == 'r':
+                userType = 'rider'
+            else:
+                userType = 'driver'
+
+            introMenuUser = User(userNewCheck, userType)
 
     currUser = introMenuUser.accessAccount()
 
@@ -85,13 +97,7 @@ while True:
                 print("\nPlease use valid options")
                 continue
 
-            userReady = input("Are you ready to continue? (y/n): ").strip().lower()
-            if userReady not in ('y', 'n'):
-                print("Invalid input. Please enter 'y' or 'n'.")
-                continue  
-            
-            if userReady == 'n':
-                break  
+            userReady = input("Are you ready to continue?")
 
     # Rider menu
     #TODO LOOPS FOR SOME GOD FORSAKEN REASON AAAAAAAAAAH...not making data entries check respective classes
@@ -123,12 +129,6 @@ while True:
                 continue
 
             userReady = input("Ready to continue? (y/n): ").strip().lower()
-            if userReady not in ('y', 'n'):
-                print("Invalid input. Please enter 'y' or 'n'.")
-                continue 
-
-            if userReady == 'n':
-                break  
 
     if should_exit:
         print("Goodbye!")

@@ -18,7 +18,8 @@ mycursor = mydb.cursor()
 mycursor.execute("USE rideShare")
 
 class Rider:
-    def __init__(self, riderID):
+    def __init__(self, riderID, name):
+        self.name = name
         if riderID is not None:
             self.riderID = riderID
         else:
@@ -26,7 +27,8 @@ class Rider:
             result = mycursor.fetchone()
             max_id = result[0] if result[0] is not None else -1 # Just in case, shouldn't need that last bit
             self.riderID = max_id + 1
-            mycursor.execute("INSERT INTO driver (riderID) VALUES (%s)", (self.riderID,))
+            mycursor.execute("INSERT INTO driver (riderID, Name) VALUES (%s, %s)", (self.riderID, self.name))
+            mydb.commit()
             print(f"Congrats new user, your ID is: {self.riderID}.\nDon't worry about a password, our network and data security is magical. Literally.")
 
     def inputLocations(self):
@@ -55,11 +57,14 @@ class Rider:
             print(ride)
 
     def endDriveRateDriver(self):
-        print(mycursor.execute("SELECT rideID FROM rides WHERE riderID = %s LIMIT 1 DESC", (self.riderID,)))
+        print(mycursor.execute("SELECT * FROM rides WHERE riderID = %s ORDER BY rideID DESC LIMIT 1", (self.riderID,)))
         rideCheck = input("Is all the information presented true? \n y/n" )
 
-        if rideCheck not in ('y', 'n'):
-            raise ValueError("Invalid input. Please enter 'y' or 'n'.")
+        while True:
+            if rideCheck not in ('y', 'n'):
+                print("Invalid input. Please enter 'y' or 'n'")
+                continue
+            break
     
         if rideCheck == 'n':
             newRideID = input("We're sorry. Could you please provide us a correct ID: ")
@@ -68,15 +73,19 @@ class Rider:
             result = mycursor.fetchone()
             lastRide = result[0] if result[0] is not None else 0
 
-        self.driveRating = input("How was your drive? Rate 1-5")
-        if self.driveRating not in (1,5):
-            raise ValueError("Invalid input. Please enter a number 1-5.")
+        while True:
+            self.driveRating = input("How was your drive? Rate 1-5")
+            if self.driveRating not in (1,2,3,4,5):
+                print("Invalid Input. Please use a number 1 through 5")
+                continue
+            break
         
         mycursor.execute("""
                         UPDATE rides
                         SET driveRating = %s, Completed = 1
                         WHERE rideID = %s
                         """, (self.driveRating, lastRide))
+        mydb.commit()
 
     
         
