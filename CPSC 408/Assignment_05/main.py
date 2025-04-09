@@ -94,6 +94,7 @@ while True:
                 break  
 
     # Rider menu
+    #TODO LOOPS FOR SOME GOD FORSAKEN REASON AAAAAAAAAAH
     elif isinstance(currUser, Rider):
         while True:
             print("Welcome to the Rider Menu!")
