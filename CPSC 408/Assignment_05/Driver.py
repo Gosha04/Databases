@@ -23,9 +23,10 @@ class Driver:
         else:
             mycursor.execute("SELECT MAX(driverID) FROM driver")
             result = mycursor.fetchone()
-            max_id = result[0] if result[0] is not None else 0 # Just in case, shouldn't need that last bit
+            max_id = result[0] if result[0] is not None else -1 # Just in case, shouldn't need that last bit
             self.driverID = max_id + 1
-            print("Congrats new user, your ID is: %s.\nDon't worry about a password, our network and data security is magical. Literally.", (self.driverID,))
+            mycursor.execute("INSERT INTO driver (driverID) VALUES (%s)", (self.driverID,))
+            print(f"Congrats new user, your ID is: {self.driverID}.\nDon't worry about a password, our network and data security is magical. Literally.")
 
 
     def viewRating(self):

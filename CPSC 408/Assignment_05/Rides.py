@@ -34,5 +34,4 @@ class Rides:
                         (self.rideID, self.riderID, self.driverID, self.startSpot, self.endSpot))
         
     def __str__(self):
-        return f"RideID: {self.rideID}, RiderID: {self.riderID}, DriverID: {self.driverID},
-            From: {self.startSpot} → To: {self.endSpot}, Completed: {self.completed}"
+        return f"RideID: {self.rideID}, RiderID: {self.riderID}, DriverID: {self.driverID}, From: {self.startSpot} → To: {self.endSpot}, Completed: {self.completed}"

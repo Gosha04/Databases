@@ -36,18 +36,20 @@ mycursor.execute("USE rideShare")
 
 # Main App Framework
 should_exit = False 
+
 while True:
-    print("Hello! Welcome to Rideshare 408, where we hope to fulfill all you transportation needs")
-    userNewCheck = input("To start, could you tell us if you are a new or existing user?\n y/n ").strip.lower
+    print("Hello! Welcome to Rideshare 408, where we hope to fulfill all your transportation needs.")
+    userNewCheck = input("To start, could you tell us if you are a new user?\n y/n ").strip().lower()
+
     if userNewCheck not in ('y', 'n'):
-        raise ValueError("Invalid input. Please enter 'y' or 'n'.")
+        print("Invalid input. Please enter 'y' or 'n'.")
+        continue  
     else:
         if userNewCheck == 'y':
             userNewCheck = True
-            print("\nWelcome new user!")
+            userName = input("\nWelcome new user!\nWhat's your name?")
             introMenuUser = User(userNewCheck)
-
-            introMenuUser.makeNewAccount()
+            introMenuUser.makeNewAccount(userName)
         else:
             userNewCheck = False
             print("\nWelcome existing user!")
@@ -55,19 +57,19 @@ while True:
 
     currUser = introMenuUser.accessAccount()
 
+    # Driver Menu 
+    #TODO LOOPS FOR SOME GOD FORSAKEN REASON AAAAAAAAAAH
     if isinstance(currUser, Driver):
         while True:
             print("Welcome to the Driver Menu!")
-            userInput = input("""
+            userInput = int(input("""
                         Menu Options:
                         1) View Rating
                         2) Set your Driving Status
                         3) View Rides
                         4) Return to main menu
-                        5) Quit Application """)
-            if userInput not in (1,5):
-                raise ValueError("Invalid input. Please enter a number 1-5.")
-            
+                        5) Quit Application """))
+
             if userInput == 1:
                 currUser.viewRating()
             elif userInput == 2:
@@ -75,28 +77,34 @@ while True:
             elif userInput == 3:
                 currUser.viewRides()
             elif userInput == 4:
-                break
-            elif userInput == 5: 
-                should_exit = True # Might make sense to switch to exit lemme know
-                break
+                break  
+            elif userInput == 5:
+                should_exit = True
+                break  
+            else:
+                print("\nPlease use valid options")
+                continue
 
-            userReady = input("Are you ready to continue? \ny\n")
+            userReady = input("Are you ready to continue? (y/n): ").strip().lower()
             if userReady not in ('y', 'n'):
-                raise ValueError("Invalid input. Please enter 'y' or 'n'.")
-    else:
+                print("Invalid input. Please enter 'y' or 'n'.")
+                continue  
+            
+            if userReady == 'n':
+                break  
+
+    # Rider menu
+    elif isinstance(currUser, Rider):
         while True:
             print("Welcome to the Rider Menu!")
-            userInput = input("""
+            userInput = int(input("""
                         Menu Options:
                         1) Find a Driver
                         2) Verify and Rate your Last Ride
                         3) View Rides
                         4) Return to main menu
-                        5) Quit Application """)
-            
-            if userInput not in (1,5):
-                raise ValueError("Invalid input. Please enter a number 1-5.")
-            
+                        5) Quit Application """))
+
             if userInput == 1:
                 currUser.inputLocations()
                 currUser.getRide()
@@ -105,27 +113,22 @@ while True:
             elif userInput == 3:
                 currUser.viewRides()
             elif userInput == 4:
-                break
-            elif userInput == 5: 
-                should_exit = True # Might make sense to switch to exit lemme know
-                break
+                break  
+            elif userInput == 5:
+                should_exit = True
+                break  
+            else:
+                print("\nPlease use valid options")
+                continue
 
-            userReady = input("Are you ready to continue? \ny\n")
+            userReady = input("Ready to continue? (y/n): ").strip().lower()
             if userReady not in ('y', 'n'):
-                raise ValueError("Invalid input. Please enter 'y' or 'n'.")
+                print("Invalid input. Please enter 'y' or 'n'.")
+                continue 
 
-    if should_exit == True:
-        break
+            if userReady == 'n':
+                break  
 
-
-
-
-
-
-
-
-
-
-
-
-
+    if should_exit:
+        print("Goodbye!")
+        break 

@@ -24,9 +24,10 @@ class Rider:
         else:
             mycursor.execute("SELECT MAX(riderID) FROM rider")
             result = mycursor.fetchone()
-            max_id = result[0] if result[0] is not None else 0 # Just in case, shouldn't need that last bit
+            max_id = result[0] if result[0] is not None else -1 # Just in case, shouldn't need that last bit
             self.riderID = max_id + 1
-            print("Congrats new user, your ID is: %s.\nDon't worry about a password, our network and data security is magical. Literally.", (self.riderID,))
+            mycursor.execute("INSERT INTO driver (riderID) VALUES (%s)", (self.riderID,))
+            print(f"Congrats new user, your ID is: {self.riderID}.\nDon't worry about a password, our network and data security is magical. Literally.")
 
     def inputLocations(self):
         self.startSpot = input("Please provide your current location: ")
