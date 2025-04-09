@@ -26,6 +26,7 @@ class Rider:
             result = mycursor.fetchone()
             max_id = result[0] if result[0] is not None else 0 # Just in case, shouldn't need that last bit
             self.riderID = max_id + 1
+            print("Congrats new user, your ID is: %s.\nDon't worry about a password, our network and data security is magical. Literally.", (self.riderID,))
 
     def inputLocations(self):
         self.startSpot = input("Please provide your current location: ")
@@ -40,11 +41,17 @@ class Rider:
         result = mycursor.fetchone()
         maxRide = result[0] if result[0] is not None else 0 # Just in case, shouldn't need that last bit
         rideID = maxRide + 1
-        driverID = None
-        Rides(rideID, self.riderID, driverID, self.startSpot, self.endSpot, completed= False)
+
+        mycursor.execute("SELECT driverID FROM driver ORDER BY RAND() LIMIT 1;")
+        driverResult = mycursor.fetchone()
+        driverID = driverResult[0]
+        print("Here is your ride info: \n" + Rides(rideID, self.riderID, driverID, self.startSpot, self.endSpot, completed= False))
 
     def viewRides(self):
         mycursor.execute("SELECT * FROM rides WHERE riderID = %s", (self.riderID,))
+        rides = mycursor.fetchall()
+        for ride in rides:
+            print(ride)
 
     def endDriveRateDriver(self):
         print(mycursor.execute("SELECT rideID FROM rides WHERE riderID = %s LIMIT 1 DESC", (self.riderID,)))
@@ -54,7 +61,7 @@ class Rider:
             raise ValueError("Invalid input. Please enter 'y' or 'n'.")
     
         if rideCheck == 'n':
-            newRideID = input("We're sorry. Could ыоу please provide us a correct ID: ")
+            newRideID = input("We're sorry. Could you please provide us a correct ID: ")
             lastRide = newRideID
         else:
             result = mycursor.fetchone()

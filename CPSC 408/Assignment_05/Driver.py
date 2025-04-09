@@ -25,6 +25,8 @@ class Driver:
             result = mycursor.fetchone()
             max_id = result[0] if result[0] is not None else 0 # Just in case, shouldn't need that last bit
             self.driverID = max_id + 1
+            print("Congrats new user, your ID is: %s.\nDon't worry about a password, our network and data security is magical. Literally.", (self.driverID,))
+
 
     def viewRating(self):
         mycursor.execute("SELECT Rating FROM driver WHERE driverID = %s", (self.driverID,))
@@ -41,3 +43,6 @@ class Driver:
 
     def viewRides(self):
         mycursor.execute("SELECT * FROM rides WHERE driverID = %s", (self.driverID,))
+        rides = mycursor.fetchall()
+        for ride in rides:
+            print(ride)
