@@ -1,22 +1,35 @@
-# spotify.py
-This repo holds "spotify.py" along with "spotifyexample.py" 
-spotifyexample.py prompts user to send the name of an artists, processing them, 
-it then returns tracks from the artists
+# Assignment_05
+This repo holds Assignment_05.sql, Driver.py, Rider.py, Rides.py, User.py, main.py, Assignment_05_ER_Diagram, and README.md
+This repo holds all file for a rideshare app, accessible for riders or drivers alike and hold information by accessing a database
+Assignment_05.sql: is the schema for the app, containting tables for Riders, Drivers, and Rides
+Driver.py is a class used by main and hold driver information and commits changes to the database
+Rider.py is a class used by main and hold rider information and commits changes to the database
+Rides.py is a class used by main and hold rides information and commits changes to the database
+User.py is a class used by main to create new users for the app, rider or driver
+main.py is the main program, it prompts user for input 
+Assignment_05_ER_Diagram is the ER diagram for the database created with Miro
 
-"spotify.py" program prompts the user for 2 artist names, prints their albums, number of albums, if they have more than 50, and which artist has more albums
+
+
 
 ## Identifying Information
 
-* Name: Ethan Esparza
-* Student ID: 2422581 (Ethan)
-* Email: eesparza@chapman.edu
-* Course: CPSC 353-02 Data Comm & Comp Networks
-* Assignment: PA03 Spotify
+* Name: Ethan Esparza, Josh Vaysman
+* Student ID: 2422581 (Ethan), 
+* Email: eesparza@chapman.edu, vaysman@chapman.edu
+* Course: CPSC 408-02 Database Management 
+* Assignment: Assignment_05
 
 ## Source Files  
-* spotifyexample.py
-* spotify.py
-* spotify-input
+* Assignment_05.sql
+* driver.py
+* Rider.py
+* Rides.py
+* User.py
+* main.py
+* rider.csv
+* rides.csv
+* driver.csv
 * README.md
 
 ## References
@@ -27,8 +40,4 @@ it then returns tracks from the artists
 
 * N/A
 
-## Build Insructions
-* ruff check spotify.py
-
 ## Execution Instructions
-* python3 spotify.py <  spotify-input
