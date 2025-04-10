@@ -2,7 +2,7 @@
 This repo holds Assignment_05.sql, Driver.py, Rider.py, Rides.py, User.py, main.py, Assignment_05_ER_Diagram, Assignment 5 Schema.xlsx and README.md
 
 This repo holds all file for a rideshare app, accessible for riders or drivers alike and hold information by accessing a database
-Assignment_05.sql: is the schema for the app, containting tables for Riders, Drivers, and Rides
+Assignment_05.sql: is the database for the app, containting tables for Riders, Drivers, and Rides
 Driver.py is a class used by main and hold driver information and commits changes to the database
 Rider.py is a class used by main and hold rider information and commits changes to the database
 Rides.py is a class used by main and hold rides information and commits changes to the database
