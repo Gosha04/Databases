@@ -27,9 +27,6 @@ Assignment_05_ER_Diagram is the ER diagram for the database created with Miro
 * Rides.py
 * User.py
 * main.py
-* rider.csv
-* rides.csv
-* driver.csv
 * README.md
 
 ## References
