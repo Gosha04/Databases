@@ -38,3 +38,4 @@ Assignment_05_ER_Diagram is the ER diagram for the database created with Miro
 * N/A
 
 ## Execution Instructions
+After opening and running all queries in Assignment_05.sql, run python3 main.py
