@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+#connects the db to python code
 mydb = mysql.connector.connect(
     host = os.getenv('MYSQL_HOST'),
     user = os.getenv('MYSQL_USERNAME'),
@@ -17,8 +18,10 @@ mycursor = mydb.cursor()
 mycursor.execute("USE rideShare")
 
 class Driver:
+    # creates driver object 
     def __init__(self, driverID, name):
         self.name = name
+        #prevents duplicate driver ids
         if driverID is not None:
             self.driverID = driverID
         else:
@@ -30,7 +33,7 @@ class Driver:
             mydb.commit()
             print(f"Congrats new user, your ID is: {self.driverID}.\nDon't worry about a password, our network and data security is magical. Literally.")
 
-
+#method to get the rating of the driver
     def viewRating(self):
         mycursor.execute("""
             UPDATE driver
@@ -43,7 +46,8 @@ class Driver:
         mycursor.execute("SELECT Rating FROM driver WHERE driverID = %s", (self.driverID,))
         result = mycursor.fetchone()
         print(result)
-    
+
+    #Sets status on db to what driver needs if they are driving or not
     def setStatus(self):
         self.status = input("Do you plan on driving? (y/n): ").strip().lower()
         if self.status not in ('y', 'n'):
@@ -54,6 +58,7 @@ class Driver:
         else: 
             mycursor.execute("UPDATE driver SET Rating = 0 WHERE driverID = %s", (self.driverID,))
 
+    #prints the rides of the driver
     def viewRides(self):
         mycursor.execute("SELECT * FROM rides WHERE driverID = %s", (self.driverID,))
         rides = mycursor.fetchall()
