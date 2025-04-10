@@ -70,7 +70,7 @@ while True:
     currUser = introMenuUser.accessAccount()
 
     # Driver Menu 
-    #TODO LOOPS FOR SOME GOD FORSAKEN REASON AAAAAAAAAAH...not making data entries check respective classes
+    
     if isinstance(currUser, Driver):
         while True:
             #options printed for driver 
@@ -101,7 +101,7 @@ while True:
             userReady = input("Are you ready to continue?")
 
     # Rider menu
-    #TODO LOOPS FOR SOME GOD FORSAKEN REASON AAAAAAAAAAH...not making data entries check respective classes
+    
     elif isinstance(currUser, Rider):
         while True:
             #rider info 
