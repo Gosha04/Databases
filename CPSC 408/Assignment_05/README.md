@@ -15,7 +15,7 @@ Assignment_05_ER_Diagram is the ER diagram for the database created with Miro
 ## Identifying Information
 
 * Name: Ethan Esparza, Josh Vaysman
-* Student ID: 2422581 (Ethan), 
+* Student ID: 2422581 (Ethan), 2449656 (Josh)
 * Email: eesparza@chapman.edu, vaysman@chapman.edu
 * Course: CPSC 408-02 Database Management 
 * Assignment: Assignment_05
