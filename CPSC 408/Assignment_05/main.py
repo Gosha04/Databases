@@ -6,7 +6,7 @@ from Driver import Driver
 from Rider import Rider
 
 load_dotenv()
-
+#connect DB
 mydb = mysql.connector.connect(
     host = os.getenv('MYSQL_HOST'),
     user = os.getenv('MYSQL_USERNAME'),
@@ -36,7 +36,7 @@ mycursor.execute("USE rideShare")
 
 # Main App Framework
 should_exit = False 
-
+#prompts users 
 while True:
     print("Hello! Welcome to Rideshare 408, where we hope to fulfill all your transportation needs.")
     userNewCheck = input("To start, could you tell us if you are a new user?\n y/n ").strip().lower()
@@ -53,7 +53,7 @@ while True:
         else:
             userNewCheck = False
             print("\nWelcome existing user!")
-
+            #prompts user for type, Rider or Driver
             while True:
                 userType = input("What type of user are you? A (d)river or (r)ider?").strip().lower()
                 if userType not in ('r', 'd'):
@@ -73,6 +73,7 @@ while True:
     #TODO LOOPS FOR SOME GOD FORSAKEN REASON AAAAAAAAAAH...not making data entries check respective classes
     if isinstance(currUser, Driver):
         while True:
+            #options printed for driver 
             print("Welcome to the Driver Menu!")
             userInput = int(input("""
                         Menu Options:
@@ -81,7 +82,7 @@ while True:
                         3) View Rides
                         4) Return to main menu
                         5) Quit Application """))
-
+            #calls for inputted numbers 
             if userInput == 1:
                 currUser.viewRating()
             elif userInput == 2:
@@ -103,6 +104,7 @@ while True:
     #TODO LOOPS FOR SOME GOD FORSAKEN REASON AAAAAAAAAAH...not making data entries check respective classes
     elif isinstance(currUser, Rider):
         while True:
+            #rider info 
             print("Welcome to the Rider Menu!")
             userInput = int(input("""
                         Menu Options:
@@ -111,7 +113,7 @@ while True:
                         3) View Rides
                         4) Return to main menu
                         5) Quit Application """))
-
+            #calls for inputted numbers 
             if userInput == 1:
                 currUser.inputLocations()
                 currUser.getRide()
@@ -129,7 +131,7 @@ while True:
                 continue
 
             userReady = input("Ready to continue? (y/n): ").strip().lower()
-
+#exit message
     if should_exit:
         print("Goodbye!")
         break 
