@@ -5,7 +5,7 @@ from Driver import Driver
 from Rider import Rider
 
 load_dotenv()
-
+#connect db
 mydb = mysql.connector.connect(
     host = os.getenv('MYSQL_HOST'),
     user = os.getenv('MYSQL_USERNAME'),
@@ -19,15 +19,19 @@ mycursor = mydb.cursor()
 mycursor.execute("USE rideShare")
 
 class User:
+    #creates user
     def __init__(self, new: bool, userType = None):
         self.new = new
         self.userType = userType
-    
+
+    #returns type of user
     def getUserType(self):
         return self.userType
 
+    #makes a new account for new users 
     def makeNewAccount(self, name):
         if self.new:
+            #prompts wether user is driver or rider
             while True:
                 self.userType = input("What type of user are you? A (d)river or (r)ider?").strip().lower()
                 if self.userType not in ('r', 'd'):
@@ -42,15 +46,18 @@ class User:
                 print(f"Account created for {self.name} as a {self.userType.capitalize()}.")
                 break
 
+    #gets account information of a user
     def accessAccount(self):
+       #defult for new users
         if self.new:
             if self.userType == 'driver':
                 return Driver(None, self.name)
             else:
                 return Rider(None, self.name)
+            #prompt based on IDs 
         else:
             self.userID = input("Please provide your corresponding ID: ")
-
+    
             if self.userType == 'driver':
                 mycursor.execute("SELECT Name FROM driver WHERE driverID = %s", (self.userID,))
                 nameD = mycursor.fetchone()
@@ -62,6 +69,7 @@ class User:
                         print(f"Driver with ID {self.userID} found.")
                         return Driver(self.userID, self.name) 
                     else:
+                        #if not found
                         print("No driver found with that ID. Please try again.")
                         print("Use a proper ID. If you are a new user, use 'None'")
             else:
